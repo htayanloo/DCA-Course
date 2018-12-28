@@ -1,0 +1,33 @@
+# OS requirements
+To install Docker CE, you need a maintained version of CentOS 7. Archived versions aren’t supported or tested.
+
+The centos-extras repository must be enabled. This repository is enabled by default, but if you have disabled it, you need to re-enable it.
+
+The overlay2 storage driver is recommended.
+
+# Step-1 (Uninstall old versions)
+sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-selinux \
+                  docker-engine-selinux \
+                  docker-engine
+
+# Step-2  (Install repository)
+
+sudo yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2
+
+  sudo yum-config-manager \
+      --add-repo \
+      https://download.docker.com/linux/centos/docker-ce.repo
+
+  sudo yum-config-manager --disable docker-ce-edge
+
+# Step-3 (INSTALL DOCKER CE)
+sudo yum install docker-ce
