@@ -1,0 +1,20 @@
+# how to config custome DNS server in container and use external dns
+
+
+# just for specific container:
+
+$ docker run --dns 4.2.2.4 busybox nslookup tayanloo.com
+
+
+# config deamon for all container DNS:
+
+Edit   /etc/docker/daemon.json  like this:
+
+
+{
+    "dns": ["10.0.0.2", "8.8.8.8"]
+}
+
+dont forget restart docker deamon for applay new config by run command:
+
+$ sudo systemctl docker restart

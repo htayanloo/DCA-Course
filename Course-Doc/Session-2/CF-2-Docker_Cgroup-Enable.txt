@@ -1,0 +1,5 @@
+NOTE : Befor Test Docker Machine with 4 Core CPU (0,1,2,3)
+IF ERROR :
+vim /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash systemd.legacy_systemd_cgroup_controller=yes"
+reboot
