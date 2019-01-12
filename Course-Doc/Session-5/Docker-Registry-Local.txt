@@ -1,0 +1,74 @@
+--------------------------------------------------------------------------------
+# Step-1: Run a local registry
+--------------------------------------------------------------------------------
+
+$ docker run -d -p 5000:5000 --restart=always --name registry registry:2
+
+--------------------------------------------------------------------------------
+# Step-2: Copy an image from Docker Hub to your registry
+--------------------------------------------------------------------------------
+
+$ docker pull ubuntu:16.04
+
+--------------------------------------------------------------------------------
+# Step-3: Tag and push Image to registry:
+--------------------------------------------------------------------------------
+$ docker tag ubuntu:16.04 localhost:5000/my-ubuntu
+
+$ docker push localhost:5000/my-ubuntu
+
+--------------------------------------------------------------------------------
+# Step-4: Remove local and pull from local registry and  remove from local registry
+--------------------------------------------------------------------------------
+$ docker image remove ubuntu:16.04
+
+$ docker pull localhost:5000/my-ubuntu
+
+$ docker image remove localhost:5000/my-ubuntu
+
+--------------------------------------------------------------------------------
+# Step-5:  Note of Registry Run  (Always restart)
+--------------------------------------------------------------------------------
+
+docker run -d \
+  -p 5000:5000 \
+  --restart=always \
+  --name registry \
+  registry:2
+
+--------------------------------------------------------------------------------
+# Step-6: Note Customize the published port
+--------------------------------------------------------------------------------
+$ docker run -d \
+  -p 5001:5000 \
+  --name registry-test \
+  registry:2
+
+--------------------------------------------------------------------------------
+# Step-7: Note change the port the registry listens !!!!
+--------------------------------------------------------------------------------
+
+$ docker run -d \
+  -e REGISTRY_HTTP_ADDR=0.0.0.0:5001 \
+  -p 5001:5001 \
+  --name registry-test \
+  registry:2
+
+--------------------------------------------------------------------------------
+# Step-8: Customize the storage location
+--------------------------------------------------------------------------------
+$ docker run -d \
+  -p 5000:5000 \
+  --restart=always \
+  --name registry \
+  -v /mnt/registry:/var/lib/registry \
+  registry:2
+
+  --------------------------------------------------------------------------------
+  # Step-9: Docker Local Registry GUI
+  --------------------------------------------------------------------------------
+
+  1- docker rm -f $(docker ps -qa)
+  2- docker run -d -p 5000:5000 --name registry-srv registry:2
+  3- docker run -it -p 8080:8080 --name registry-web --link registry-srv -e REGISTRY_URL=http://registry-srv:5000/v2 -e REGISTRY_NAME=localhost:5000 hyper/docker- registry-web
+  4- Web UI will be available on http://localhost:8080 OR http://IP/8080
