@@ -1,4 +1,4 @@
-Edit the file “/usr/lib/systemd/system/docker.service” and change the parameter ExecStart=/usr/bin/dockerd
+Edit the file "/usr/lib/systemd/system/docker.service" and change the parameter ExecStart=/usr/bin/dockerd
 to
-ExecStart=/usr/bin/dockerd –insecure-registry 192.168.190.232:5000 
+ExecStart=/usr/bin/dockerd --insecure-registry 192.168.190.232:5000
 Container Registry IP
