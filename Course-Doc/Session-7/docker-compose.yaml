@@ -1,0 +1,17 @@
+#  Example of placement in compose
+
+version: '3.3'
+services:
+  db:
+    image: postgres
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+          - engine.labels.operatingsystem == ubuntu 14.04
+        preferences:
+          - spread: node.labels.zone
+
+
+
+docker service create --name my-nginx --mode global --constraint [node.hostname == dn1.bin.ir] nginx

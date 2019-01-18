@@ -1,0 +1,67 @@
+#############
+
+{Rack-1=> Node1, Node2 and Node3},
+
+{Rack-2=> Node4}
+
+{Rack-3=> Node5}
+#############
+
+###Creating Swarm Master Node:
+
+docker swarm init --advertise-addr 10.0.116.3
+
+
+###Adding Worker Nodes to Swarm Cluster
+
+docker swarm join --token <token-id> 10.0.116.3:2377
+
+
+### Setting up Visualizer Tool
+
+git clone https://github.com/ajeetraina/docker101
+cd docker101/play-with-docker/visualizer
+docker-compose up -d
+
+### Creating an Overlay Network:
+$docker network create -d overlay collabnet
+
+
+### Setting up WordPress DB service:
+
+docker service create --replicas 10 --name wordpressdb1 --network collabnet --env MYSQL_ROOT_PASSWORD=collab123 --env MYSQL_DATABASE=wordpress mysql:latest
+
+###Setting up WordPress Web Application:
+
+docker service create --env WORDPRESS_DB_HOST=wordpressdb1 --env WORDPRESS_DB_PASSWORD=collab123 --network collabnet --replicas 3 --name wordpressapp --publish 80:80/tcp wordpress:latest
+
+
+###  set node labels
+Three nodes with node.labels.datacenter=rack-1
+One node with node.labels.datacenter=rack-2
+One node with node.labels.datacenter=rack-3
+
+Rack-1 :
+  Node-1
+  docker node update --label-add datacenter=rack-1 node1
+  docker node update --label-add datacenter=rack-1 node2
+  docker node update --label-add datacenter=rack-1 node3
+
+Rack-2 :
+  Node-4
+  docker node update --label-add datacenter=rack-2 node4
+
+Rack-3 :
+  Node-5
+  docker node update --label-add datacenter=rack-3 node5
+
+
+
+### Removing both the services:
+
+docker service rm wordpressdb1 wordpressapp
+
+
+docker service create --replicas 10 --name wordpressdb1 --network collabnet --placement-pref “spread=node.labels.datacenter” --env MYSQL_ROOT_PASSWORD=collab123 --env MYSQL_DATABASE=wordpress mysql:latest
+
+docker service create --env WORDPRESS_DB_HOST=wordpressdb1 --env WORDPRESS_DB_PASSWORD=collab123 --placement-pref “spread=node.labels.datacenter” --network collabnet --replicas 3 --name wordpressapp --publish 80:80/tcp wordpress:latest
