@@ -1,0 +1,7 @@
+docker network create -d overlay proxy
+docker service create --name haproxy --network proxy --mount target=/var/run/docker.sock,source=/var/run/docker.sock,type=bind -p 80:80 -p 1936:1936 --constraint "node.role == manager" dockercloud/haproxy
+docker service create -e SERVICE_PORTS="80" --name app2 --network proxy --replicas 4 dockercloud/hello-world
+
+
+
+docker service update --env-add VIRTUAL_HOST=app1.test app2
