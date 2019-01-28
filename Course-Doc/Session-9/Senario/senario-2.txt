@@ -1,0 +1,9 @@
+#Exceed a Container’s memory limit
+
+kubectl create -f https://k8s.io/examples/pods/resource/memory-request-limit-2.yaml --namespace=mem-example
+kubectl get pod memory-demo-2 –namespace=mem-example
+kubectl get pod memory-demo-2 --output=yaml --namespace=mem-example
+kubectl get pod memory-demo-2 –namespace=mem-example
+kubectl describe pod memory-demo-2 –namespace=mem-example
+kubectl describe nodes
+kubectl delete pod memory-demo-2 --namespace=mem-example

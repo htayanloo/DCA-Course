@@ -1,0 +1,8 @@
+#Create a Pod that gets assigned a QoS class of Burstable
+
+
+kubectl create -f https://k8s.io/examples/pods/qos/qos-pod-2.yaml --namespace=qos-example
+
+kubectl create -f https://k8s.io/examples/pods/qos/qos-pod-2.yaml --namespace=qos-example
+
+kubectl delete pod qos-demo-2 --namespace=qos-example

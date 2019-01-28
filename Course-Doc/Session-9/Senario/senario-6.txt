@@ -1,0 +1,4 @@
+#Assign CPU Resources to Containers and Pods
+kubectl create -f https://k8s.io/examples/pods/qos/qos-pod.yaml --namespace=qos-example
+kubectl get pod qos-demo --namespace=qos-example –output=yaml
+kubectl delete pod qos-demo --namespace=qos-example

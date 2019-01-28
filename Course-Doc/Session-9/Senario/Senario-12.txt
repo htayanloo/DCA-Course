@@ -1,0 +1,16 @@
+Step-1:
+mkdir /mnt/data
+echo 'Hello from Kubernetes storage' > /mnt/data/index.html
+kubectl create -f https://k8s.io/examples/pods/storage/pv-volume.yaml
+kubectl get pv task-pv-volume
+Step-2:
+kubectl create -f https://k8s.io/examples/pods/storage/pv-claim.yaml
+kubectl get pv task-pv-volume
+kubectl get pvc task-pv-claim
+Step-3
+kubectl create -f https://k8s.io/examples/pods/storage/pv-pod.yaml
+kubectl get pod task-pv-pod
+kubectl exec -it task-pv-pod -- /bin/bash
+root@task-pv-pod:/# apt-get update
+root@task-pv-pod:/# apt-get install curl
+root@task-pv-pod:/# curl localhost

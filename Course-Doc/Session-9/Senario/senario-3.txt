@@ -1,0 +1,6 @@
+#Specify a memory request that is too big for your Nodes
+
+kubectl create -f https://k8s.io/examples/pods/resource/memory-request-limit-3.yaml –namespace=mem-example
+kubectl get pod memory-demo-3 –namespace=mem-example
+kubectl describe pod memory-demo-3 –namespace=mem-example
+kubectl delete pod memory-demo-3 --namespace=mem-example

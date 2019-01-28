@@ -1,0 +1,7 @@
+#Specify a CPU request that is too big for your Nodes
+
+
+kubectl create -f https://k8s.io/examples/pods/resource/cpu-request-limit-2.yaml --namespace=cpu-example
+kubectl get pod cpu-demo-2 --namespace=cpu-example
+kubectl describe pod cpu-demo-2 --namespace=cpu-example
+kubectl delete pod cpu-demo-2 --namespace=cpu-example

@@ -1,0 +1,9 @@
+#----Assign Memory Resources to Containers and Pods
+
+
+kubectl create namespace mem-example
+kubectl create -f https://k8s.io/examples/pods/resource/memory-request-limit.yaml --namespace=mem-example
+kubectl get pod memory-demo --namespace=mem-example
+kubectl get pod memory-demo --output=yaml --namespace=mem-example
+kubectl top pod memory-demo --namespace=mem-example
+kubectl delete pod memory-demo --namespace=mem-example

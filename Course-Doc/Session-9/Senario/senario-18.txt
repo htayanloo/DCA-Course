@@ -1,0 +1,4 @@
+kubectl create -f https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/application/job/cronjob.yaml
+
+kubectl get cronjob hello
+kubectl get jobs --watch

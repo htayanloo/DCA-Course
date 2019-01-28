@@ -1,0 +1,2 @@
+kubectl create -f https://k8s.io/examples/admin/resource/memory-defaults-pod-2.yaml --namespace=default-mem-example
+kubectl get pod default-mem-demo-2 --output=yaml --namespace=default-mem-example

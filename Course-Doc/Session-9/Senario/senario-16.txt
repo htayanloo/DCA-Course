@@ -1,0 +1,11 @@
+Create a namespace
+kubectl create namespace quota-pod-example
+Create a ResourceQuota
+kubectl create -f https://k8s.io/examples/admin/resource/quota-pod.yaml --namespace=quota-pod-example
+
+kubectl get resourcequota pod-demo --namespace=quota-pod-example --output=yaml
+
+
+kubectl create -f https://k8s.io/examples/admin/resource/quota-pod-deployment.yaml --namespace=quota-pod-example
+kubectl get deployment pod-quota-demo --namespace=quota-pod-example –output=yaml
+kubectl delete namespace quota-pod-example

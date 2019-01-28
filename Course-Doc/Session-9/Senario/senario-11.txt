@@ -1,0 +1,7 @@
+mkdir /mnt/data
+
+echo 'Hello from Kubernetes storage' > /mnt/data/index.html
+
+kubectl create -f https://k8s.io/examples/pods/storage/pv-volume.yaml
+
+kubectl get pv task-pv-volume

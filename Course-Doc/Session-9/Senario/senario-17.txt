@@ -1,0 +1,6 @@
+kubectl get nodes
+kubectl label nodes <your-node-name> disktype=ssd
+kubectl get nodes --show-labels
+
+kubectl create -f https://k8s.io/examples/pods/pod-nginx.yaml
+kubectl get pods --output=wide

@@ -1,0 +1,7 @@
+#Create a Pod that has two Containers
+
+kubectl create -f https://k8s.io/examples/pods/qos/qos-pod-4.yaml --namespace=qos-example
+
+kubectl get pod qos-demo-4 --namespace=qos-example --output=yaml
+
+kubectl delete pod qos-demo-4 --namespace=qos-example
